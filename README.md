@@ -52,6 +52,12 @@ especial llamado `open_hours` que refleja el horario de apertura y cierre de los
 
 ### Correr el proyecto
 
+Clonar el repositorio e instalar las dependencias con
+
+```bash
+$ yarn
+```
+
 El proyecto se puede levantar con `docker-compose` o desde el host como lo indica la documentación de [NestJS](https://docs.nestjs.com/).
 Nota: Si se corre desde el host también hay que correr en paralelo la API mock.
 
