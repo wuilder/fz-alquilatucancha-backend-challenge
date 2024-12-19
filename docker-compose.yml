@@ -2,6 +2,8 @@ version: '3.7'
 services:
   api:
     image: atc-challenge:dev
+    depends_on:
+      - redis
     build:
       dockerfile: Dockerfile
       context: .
@@ -13,8 +15,18 @@ services:
       - 3000:3000
     environment:
       ATC_BASE_URL: http://mock:4000
+      REDIS_URL: redis://redis:6379
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   mock:
     image: atc-challenge:dev
+    depends_on:
+      - api
     command: node /usr/src/app/mock/server.js
     volumes:
       - ./mock:/usr/src/app/mock
@@ -24,3 +36,7 @@ services:
       EVENT_INTERVAL_SECONDS: 10
       REQUESTS_PER_MINUTE: 60
       EVENT_PUBLISHER_URL: http://api:3000/events
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

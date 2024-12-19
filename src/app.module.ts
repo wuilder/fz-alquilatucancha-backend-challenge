@@ -9,9 +9,12 @@ import { ALQUILA_TU_CANCHA_CLIENT } from './domain/ports/aquila-tu-cancha.client
 import { HTTPAlquilaTuCanchaClient } from './infrastructure/clients/http-alquila-tu-cancha.client';
 import { EventsController } from './infrastructure/controllers/events.controller';
 import { SearchController } from './infrastructure/controllers/search.controller';
+import { CacheService } from './application/cache.service';
+import { RedisModule } from './infrastructure/redis/redis.module';
+import { EventsModule } from './infrastructure/events/events.module';
 
 @Module({
-  imports: [HttpModule, CqrsModule, ConfigModule.forRoot()],
+  imports: [HttpModule, CqrsModule, ConfigModule.forRoot(), RedisModule, EventsModule,],
   controllers: [SearchController, EventsController],
   providers: [
     {
@@ -20,6 +23,7 @@ import { SearchController } from './infrastructure/controllers/search.controller
     },
     GetAvailabilityHandler,
     ClubUpdatedHandler,
+    CacheService,
   ],
 })
-export class AppModule {}
+export class AppModule { }
