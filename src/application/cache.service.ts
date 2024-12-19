@@ -1,12 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { RedisRepository } from '../domain/repository/redis.repository';
-import { RedisService } from '../infrastructure/redis/redis.service';
-import { Club } from 'src/domain/model/club';
 
 @Injectable()
 export class CacheService {
     constructor(
-        //private readonly redisRepository: RedisService,
         @Inject('REDIS') private readonly redisRepository: RedisRepository,
     ) { }
 

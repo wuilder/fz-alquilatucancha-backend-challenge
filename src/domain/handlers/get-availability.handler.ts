@@ -1,8 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
-import * as moment from 'moment';
-
 import {
   ClubWithAvailability,
   GetAvailabilityQuery,
