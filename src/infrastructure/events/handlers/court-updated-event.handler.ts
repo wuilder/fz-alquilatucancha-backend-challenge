@@ -35,7 +35,7 @@ export class CourtUpdatedEventHandler implements IEventHandler<CourtUpdatedEvent
             const courtFromClub = this.clubUpdatedEvent.updateCourtsFromClub(club, event);
 
             const courtFromCorts = courts.map(court => {
-                if (court.id === courtId) {
+                if (court.id === courtId && fields.length > 0) {
                     fields.map(field => {
                         court[field] = court[field]
                     })

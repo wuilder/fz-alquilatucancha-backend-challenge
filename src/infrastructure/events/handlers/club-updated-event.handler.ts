@@ -34,9 +34,11 @@ export class ClubUpdatedEventHandler implements IEventHandler<ClubUpdatedEvent> 
 
             const club = await this.getClub(clubId.toString());
 
-            fields.map(field => {
-                club[field] = club[field]
-            });
+            if (fields.length > 0) {
+                fields.map(field => {
+                    club[field] = club[field]
+                });
+            }
 
             const objetctoUpdate = {
                 ...club,
@@ -52,7 +54,7 @@ export class ClubUpdatedEventHandler implements IEventHandler<ClubUpdatedEvent> 
         const { clubId, courtId, fields } = event;
 
         const courtFromClub = club.courts.map(court => {
-            if (court.id === courtId) {
+            if (court.id === courtId && fields.length > 0) {
                 fields.map(field => {
                     court[field] = court[field]
                 })
